@@ -1,0 +1,8 @@
+{
+  "files.associations": {
+    "*.swift": "swift",
+    "iostream": "cpp",
+    "map": "cpp",
+    "*.tcc": "cpp"
+  }
+}

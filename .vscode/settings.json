@@ -3,6 +3,7 @@
     "*.swift": "swift",
     "iostream": "cpp",
     "map": "cpp",
-    "*.tcc": "cpp"
+    "*.tcc": "cpp",
+    "ostream": "cpp"
   }
 }

@@ -5,6 +5,9 @@
     "map": "cpp",
     "*.tcc": "cpp",
     "ostream": "cpp",
-    "functional": "cpp"
+    "functional": "cpp",
+    "array": "cpp",
+    "initializer_list": "cpp",
+    "utility": "cpp"
   }
 }

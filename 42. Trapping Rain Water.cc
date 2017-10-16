@@ -6,57 +6,22 @@ using namespace std;
 
 class Solution {
 public:
+    
     int trap(vector<int>& height) {
-      int l=-1, r=-1;
-      bool ascent=true;
-      int sum=0, min;
-      
-      for(int i=1;i<height.size();i++){
-        if(height[i] < height[i-1]){
-          if(ascent==true){
-            if(l==-1){
-              l=i-1;
-            }else if(r==-1){
-              r=i-1;
+      int l=0, r=height.size()-1;
+      int lmax=0, rmax=0;
+      int sum=0;
 
-              // cout << l << " " << r << endl;
-              min = height[l]<height[r]?height[l]:height[r];
-              sum += (r-l-1)*min;
-              for(int j=l+1;j<r;j++){
-                if(height[j] > min){
-                  sum -= min;
-                }else{
-                  sum -= height[j];
-                }
-              }
-              
-              l=r;
-              r=-1;
-            }
-            ascent=false;
-          }
-        }else if(height[i]>height[i-1]){
-          if(ascent==false){
-            ascent=true;
-          }
+      while(l<=r){
+        if(height[l]<height[r]){
+          if(lmax < height[l]){lmax=height[l];}
+          sum += lmax-height[l];
+          l++;
+        }else{
+          if(rmax < height[r]){rmax=height[r];}
+          sum += rmax-height[r];
+          r--;
         }
-      }
-      if(l!=-1){
-        r=height.size()-1;
-        
-        // cout << l << " " << r << endl;
-        min = height[l]<height[r]?height[l]:height[r];
-        sum += (r-l-1)*min;
-        for(int j=l+1;j<r;j++){
-          if(height[j] > min){
-            sum -= min;
-          }else{
-            sum -= height[j];
-          }
-        }
-        
-        l=r;
-        r=-1;
       }
       return sum;
     }

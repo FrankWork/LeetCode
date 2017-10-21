@@ -8,9 +8,20 @@ class Solution {
 public:
     bool isMatch(string s, string p) {
       int i=0,j=0;
+      bool res=false;
 
+      while(i<s.size() && j<p.size()){
+        if(s[i]==p[j]){
+          i++;
+          j++;
+        }else{
+          i++;
+          j=0;
+        }
+      }
+      if(i==s.size() && j==p.size()){res=true;}
       
-      return false;
+      return res;
     }
 };
 

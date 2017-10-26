@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <queue>
 #include <algorithm>
 
 using namespace std;
@@ -21,8 +22,36 @@ public:
     }
     int jump(vector<int>& nums) {
       int min=-1;
+      int step;
+      int i;
 
       bt(nums, 0, 0, min);
+      // queue<int> steps;
+      // queue<int> nodes;//push pop
+
+      // steps.push(0);
+      // nodes.push(0);
+
+      // while(!nodes.empty()){
+      //   step = steps.front();
+      //   i = nodes.front();
+      //   steps.pop();
+      //   nodes.pop();
+      //   //
+      //   if(i>=nums.size()-1){
+      //     if(min==-1 || min>step){
+      //       min=step;
+      //     }
+      //     continue;
+      //   } 
+      //   if(min!=-1 && step>=min){continue;}
+  
+      //   for(int j=1;j<=nums[i];j++){
+      //     nodes.push(i+j);
+      //     steps.push(step+1);
+      //   }
+
+      // }
 
       return min;
     }
@@ -62,7 +91,7 @@ int main(){
   // vector<int> nums8{4,4,1,3,1,1,1};
   // print(so.jump(nums8), 2); 
   
-  // 31s
+  // dfs:31s bfs:1m44s
   vector<int> nums9{8,2,4,4,4,9,5,2,5,8,8,0,8,6,9,1,1,6,3,5,1,2,6,6,0,4,8,6,0,3,2,8,7,6,5,1,7,0,3,4,8,3,5,9,0,4,0,1,0,5,9,2,0,7,0,2,1,0,8,2,5,1,2,3,9,7,4,7,0,0,1,8,5,6,7,5,1,9,9,3,5,0,7,5};
-  print(so.jump(nums9), 0);
+  print(so.jump(nums9), 13);
 }

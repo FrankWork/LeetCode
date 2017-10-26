@@ -6,35 +6,29 @@ using namespace std;
 
 class Solution {
 public:
-    bool isMatch(const string& s, const string& b, int si, int bj){
-      int i=si,j=bj;
-      bool res=true;
-
-      while(i<s.size() && j<p.size()){
-        if(s[i]==p[j] || p[j]=='?'){//|| p[j]=='*'
-          i++;
-          j++;
-        }
-        else if(p[j]=='*'){
-
-          if(j<p.size()-1 && s[i]!=p[j+1]){
-            i++;
+    bool isMatch(const string& s, const string& p, int i, int j, vector<vector<int>>& result){
+      //backtrace &&  brute force
+      if(i==s.size() && j==p.size()){return true;}
+      
+      if(s[i]==p[j] || p[j]=='?'){
+        return isMatch(s, p, i+1,j+1, result);
+      }else if(p[j]=='*'){
+        for(int k=i;k<=s.size();k++){
+          bool res;
+          if(result[k][j+1]==-1){
+            res = isMatch(s,p,k,j+1, result);
+            result[k][j+1] = res?1:0;
           }else{
-            j++;
+            res = result[k][j+1]==1?true:false;
           }
-
-        }
-        else{
-          res=false;
-          break;
+          if(res){return true;}
         }
       }
-      if(i!=s.size() || j!=p.size()){res=false;}
-      
-      return res;
+      return false;
     }
     bool isMatch(string s, string p) {
-      return isMatch(s, p, 0, 0);
+      vector<vector<int>> result(s.size()+1, vector<int>(p.size()+1, -1));
+      return isMatch(s, p, 0, 0, result);
     }
 };
 
@@ -51,8 +45,16 @@ int main(){
   // print(so.isMatch("aaa","a?a")    , true); 
   // print(so.isMatch("ada","a?a")    , true); 
 
-  print(so.isMatch("aa", "*")     , true); 
+  // print(so.isMatch("aa", "aa*")    , true); 
+  // print(so.isMatch("aa", "*")     , true); 
   // print(so.isMatch("aa", "a*")    , true); 
   // print(so.isMatch("ab", "?*")    , true); 
   // print(so.isMatch("aab", "c*a*b"), false); 
+  // print(so.isMatch("abc.out", "*.out"), true); 
+  // print(so.isMatch("abc.out", "*.out*"), true); 
+
+  // 10s
+  print(so.isMatch("bbbbbbbabbaabbabbbbaaabbabbabaaabbababbbabbbabaaabaab", "b*b*ab**ba*b**b***bba"), false); 
+  
+  
 }

@@ -15,40 +15,16 @@ void print(vector<T>& nums){
 
 class Solution {
 public:
-
-    double myPow(double x, int n){
-        // x^100 = x^(2^6+2^5+2^2+1)
-        if(n==0) return 1;
-        else if(n==INT_MIN) return 1/myPow(x, INT_MAX)*x;
-        else if(n<0) return 1/myPow(x,-n);
-
-        int m = static_cast<int>(log2(n));
-        vector<int> idx(m+1);
-        vector<double> val(m+1);
-        idx[0]=1;
-        val[0]=x;
-        // 0:x, 1:x^2, 2:x^4, .. , m:x^2^m
-        for(int i=1;i<=m;i++){
-            idx[i] = 2 << (i-1);
-            val[i] = val[i-1]*val[i-1];
-        }
-        // cout << "=== idx and val ===" << endl;
-        // cout << "m: " << m << endl;
-        // print(idx);
-        // print(val);
-        // cout << "===================" << endl;
-
-        double res=1;
-        for(int i=m;i>=0;i--){
-            if(n-idx[i] >= 0){
-                res *= val[i];
-                n -= idx[i];
-            }
-        }
-
-        return res;
+    double myPow(double x, int n) {
+        if (n < 0) return 1 / power(x, -n);
+        return power(x, n);
     }
-    
+    double power(double x, int n) {
+        if (n == 0) return 1;
+        double half = power(x, n / 2);
+        if (n % 2 == 0) return half * half;
+        return x * half * half;
+    }
 };
 
 

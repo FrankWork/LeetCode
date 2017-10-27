@@ -23,13 +23,14 @@ public:
       if(n==nums.size())
         res.push_back(nums);
       for(int i=n;i<nums.size();i++){
+        if(i!=n && nums[n]==nums[i]) continue;
         swap(nums[n], nums[i]);
-        
         bt(nums, res, n+1);
       }
     }
     vector<vector<int>> permuteUnique(vector<int>& nums) {
       vector<vector<int>> res;
+      sort(nums.begin(), nums.end());
       bt(nums, res, 0);
       return res;
     }
@@ -42,15 +43,16 @@ int main(){
 
   vector<int> nums{1,1,2};
   print2d(so.permuteUnique(nums));
-    // [1,2,3],
-    // [1,3,2],
-    // [2,1,3],
-    // [2,3,1],
-    // [3,1,2],
-    // [3,2,1]
+  // [1,1,2],
+  // [1,2,1],
+  // [2,1,1]
 
-  // vector<int> nums2{1,2,3,4};
-  // print2d(so.permuteUnique(nums2));
+  vector<int> nums2{3,3,0,3};
+  print2d(so.permuteUnique(nums2));
+  // [[0,3,3,3],
+  // [3,0,3,3],
+  // [3,3,0,3],
+  // [3,3,3,0]]
 
  
 }

@@ -22,14 +22,20 @@ public:
   void rotate(vector<vector<int>>& matrix) {
     // (i,j)=>(j,n-1-i)
     int n = matrix.size();
-    vector<vector<int>> copy;
-    for(int i=0;i<n;i++){
-      copy.push_back(matrix[i]);
-    }
+    // vector<vector<int>> copy;
+    // for(int i=0;i<n;i++){
+    //   copy.push_back(matrix[i]);
+    // }
     
+    // for(int i=0;i<n;i++){
+    //   for(int j=0;j<n;j++){
+    //     swap(copy[i][j], matrix[j][n-1-i]);
+    //   }
+    // }
+    int m = n%2==0 ? n/2 : n/2+1;
     for(int i=0;i<n;i++){
-      for(int j=0;j<n;j++){
-        swap(copy[i][j], matrix[j][n-1-i]);
+      for(int j=0;j<n-1-i;j++){
+        swap(matrix[i][j], matrix[j][n-1-i]);
       }
     }
   }

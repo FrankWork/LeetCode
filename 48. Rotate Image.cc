@@ -20,22 +20,20 @@ void print2d(vector<vector<int>> res){
 class Solution {
 public:
   void rotate(vector<vector<int>>& matrix) {
-    // (i,j)=>(j,n-1-i)
+    // (i,j)       =>   (j,n-1-i)
+    //  ^                  |
+    //  |                  v
+    // (n-1-j,i)  <=   (n-1-i, n-1-j)
     int n = matrix.size();
-    // vector<vector<int>> copy;
-    // for(int i=0;i<n;i++){
-    //   copy.push_back(matrix[i]);
-    // }
-    
-    // for(int i=0;i<n;i++){
-    //   for(int j=0;j<n;j++){
-    //     swap(copy[i][j], matrix[j][n-1-i]);
-    //   }
-    // }
     int m = n%2==0 ? n/2 : n/2+1;
-    for(int i=0;i<n;i++){
-      for(int j=0;j<n-1-i;j++){
-        swap(matrix[i][j], matrix[j][n-1-i]);
+    int t;
+    for(int i=0;i<m;i++){
+      for(int j=i;j<n-1-i;j++){
+        t = matrix[i][j];
+        matrix[i][j]=matrix[n-1-j][i];
+        matrix[n-1-j][i]=matrix[n-1-i][n-1-j];
+        matrix[n-1-i][n-1-j]=matrix[j][n-1-i];
+        matrix[j][n-1-i]=t;
       }
     }
   }

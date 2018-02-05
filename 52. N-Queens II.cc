@@ -49,6 +49,11 @@ public:
       return results;
     }
 
+    int totalNQueens(int n) {
+        auto res = solveNQueens(n);
+        return res.size();
+    }
+
 };
 
 

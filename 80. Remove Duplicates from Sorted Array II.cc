@@ -16,26 +16,16 @@ void print(vector<T> &vec){
 class Solution {
 public:
     int removeDuplicates(vector<int>& nums) {
-      int n = nums.size();
-      if(n==0)return 0;
-      int l=0,r=0;
-      
-      while(r<n){
-        // printf("l:%d r:%d %d %d\n", l, r, nums[l], nums[r]);
-        if(nums[l]!=nums[r]){
-          l=r;
-          ++r;
-        }else{
-          if(r-l>1){
-            for(int i=r;i<n-1;++i){
-              nums[i]=nums[i+1];
-            }
-            --n;
-          }else{
-            ++r;
-          }
+      if(nums.size()<=2){
+        return nums.size();
+      }
+      int n=2;
+      for(int i=2;i<nums.size();++i){
+        // printf("i:%d n:%d\n", i, n);
+        if(nums[i]!=nums[n-2]){
+          nums[n]=nums[i];
+          ++n;
         }
-        // ++r;
       }
       
       return n;

@@ -21,6 +21,27 @@ void print2d(vector<vector<int>> &matrix){
 
 int main(){
   
-  
+  int m,n;
+  cin>>m>>n;
+  bool pos=m>0;
+  if(!pos)m=-m;
+  vector<int> nums;
+  while(m){
+    nums.push_back(m%n);
+    m/=n;
+  }
+  // print(nums);
+  if(!pos){
+    cout<<'-';
+  }
+  for(int i=nums.size()-1;i>=0;--i)
+  {
+    if(nums[i]<10)
+      cout <<nums[i];
+    else
+      cout <<(char)(nums[i]-10+'A');
+  }
+  cout<<endl;
+
   return 0;
 }

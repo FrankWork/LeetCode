@@ -18,9 +18,21 @@ void print2d(vector<vector<int>> &matrix){
   }
 }
 
-void dfs(vector<int> &nums, vector<vector<int>>&res, vector<int> tmp, int idx, int n, int m){
+void dfs(vector<int> &nums, vector<vector<int>>&res, 
+         vector<int> &tmp, int idx, int sum, int n, int m){
+  if(sum==m){
+    res.push_back(tmp);
+    return;
+  }else if(sum>m){
+    return;
+  }
+
   for(int i=idx;i<=n;++i){
-    
+    sum+=nums[i];
+    tmp.push_back(nums[i]);
+    dfs(nums, res, tmp, i+1, sum, n,m);
+    tmp.pop_back();
+    sum-=nums[i];
   }
 }
 
@@ -31,10 +43,13 @@ int main(){
   for(int i=1;i<=n;++i){
     nums[i]=i;
   }
+  // print(nums);
 
   vector<vector<int>> res;
   vector<int> tmp;
-  dfs(nums, res, tmp, 1, n, m);
-  
+  dfs(nums, res, tmp, 1, 0, n, m);
+  for(int i=0;i<res.size();++i){
+    print(res[i]);
+  }
   return 0;
 }

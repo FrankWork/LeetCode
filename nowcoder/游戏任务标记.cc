@@ -3,6 +3,7 @@
 #include <cstdio>
 #include <cmath>
 #include<cstring>
+#include <bitset>
 using namespace std;
 
 void print(vector<int> & nums){
@@ -27,17 +28,17 @@ int main(){
     cout << -1<<endl;
     return 0;
   }
-  unsigned bitset[32];
-  memset(bitset, 0, 32);
+  unsigned bitArr[32], one=1;
+  memset(bitArr, 0, 32);
   
-  bitset[id1/32] = (id1%32) | ;
-
-  if(id2==id1){
+  bitArr[id1/32] = 1<<(id1%32-1);// set
+  if((bitArr[id2/32] >> (id2%32-1))& one){
     cout << 1<<endl;
   }
   else{
     cout << 0<<endl;
   }
-  
+
+
   return 0;
 }

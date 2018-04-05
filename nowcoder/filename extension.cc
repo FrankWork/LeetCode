@@ -21,7 +21,18 @@ void print2d(vector<vector<int>> &matrix){
 
 
 int main(){
-  
-  
+  string path;
+  while(cin>>path){
+    int i = path.rfind('/');
+    if(i!=-1){
+      path=path.substr(i+1, path.length()-i-1);
+    }
+    i=path.rfind('.');
+    string ans="null";
+    if(i!=-1){
+      ans=path.substr(i+1, path.length()-i-1);
+    }
+    cout <<ans<<endl;
+  }
   return 0;
 }

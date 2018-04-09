@@ -3,6 +3,7 @@
 #include <cstdio>
 #include <cmath>
 #include <algorithm>
+#include <map>
 using namespace std;
 
 template <class T>
@@ -22,7 +23,19 @@ void print2d(vector<vector<T>> &matrix){
 }
 
 int main(){
-  
+  string text;
+  while(getline(cin, text)){
+    map<char,int> s;
+    for(char c:text){
+      if(isalnum(c)){
+        ++s[c];
+        if(s[c]==3){
+          cout <<c<<endl;
+          break;
+        }
+      }
+    }
+  }
   
   return 0;
 }

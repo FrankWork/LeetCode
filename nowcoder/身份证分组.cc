@@ -22,7 +22,19 @@ void print2d(vector<vector<T>> &matrix){
 }
 
 int main(){
-  
+  string str;
+  while(getline(cin, str)){
+    int j=0;
+    for(int i=0;i<str.length();++i){
+      if(str[i]==' '){continue;}
+      cout << str[i];
+      ++j;
+      if(j==6||j==6+8){
+        cout <<" ";
+      }
+    }
+    cout <<endl;
+  }
   
   return 0;
 }

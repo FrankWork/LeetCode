@@ -27,6 +27,7 @@ int main(){
   string str;
   set<char> chars{'A','B','C','D','E'};
   while(cin>>str){
+    int l=0,r=0;
     
   }
   

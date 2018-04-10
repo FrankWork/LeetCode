@@ -1,10 +1,8 @@
 #include <iostream>
 #include <vector>
-#include <set>
 #include <cstdio>
 #include <cmath>
 #include <algorithm>
-#include<string>
 using namespace std;
 
 template <class T>
@@ -24,12 +22,18 @@ void print2d(vector<vector<T>> &matrix){
 }
 
 int main(){
-  string str;
-  set<char> chars{'A','B','C','D','E'};
-  while(cin>>str){
-    int l=0,r=0;
-    
+  int m;
+  double n;
+  while(cin>>n>>m){
+    double ans=0;
+
+    for(int i=0;i<m;++i){
+      ans += n;
+      n=sqrt(n);
+    }
+    printf("%.2f\n", ans);
   }
+  
   
   return 0;
 }

@@ -14,11 +14,11 @@ public:
       }
 
       for(idx=0;idx<32;++idx){
-        if(sum & (1<<idx) != 0)break;
+        if((sum & (1<<idx)) != 0)break;
       }
 
       for(int i=0;i<data.size();++i){
-        if(data[i] & (1<<idx) != 0){
+        if((data[i] & (1<<idx)) != 0){
           *num1 ^= data[i];
         }else{
           *num2 ^= data[i];

@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <cstdio>
+#include <climits>
 #include <set>
 #include <unordered_set>
 
@@ -14,4 +15,11 @@ void print(vector<T>& arr){
         cout<<arr[i]<<" ";
     }
     cout<<endl;
+}
+
+template<class T>
+void print2d(vector<vector<T>> & matrix){
+    for(int i=0;i<matrix.size();++i){
+        print(matrix[i]);
+    }
 }

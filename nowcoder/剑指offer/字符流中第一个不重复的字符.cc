@@ -1,11 +1,18 @@
 #include "template.h"
 
+void print(vector<int> &arr){
+  for(int i=0;i<arr.size();++i){
+    cout << arr[i]<<" ";
+  }
+  cout <<endl;
+}
 class Solution
 {
 public:
     vector<int> arr;
     Solution(){
-      arr.reserve(256);
+      for(int i=0;i<256;++i)
+          arr.push_back(0);
     }
 
   //Insert one char from stringstream
@@ -26,8 +33,9 @@ public:
     char FirstAppearingOnce()
     {
         int i=0;
+        // print(arr);
         for(;i<arr.size();++i){
-          if(arr[i]==1)return arr[i];
+          if(arr[i]==1)return (char)i;
         }
         return '#';
     }
@@ -35,11 +43,13 @@ public:
 };
 
 int main(){
-测试用例:
-"google"
+    Solution so;
+    string str="google";
+    for(int i=0;i<str.length();++i){
+      so.Insert(str[i]);
+      cout <<so.FirstAppearingOnce();
+    }
 
-对应输出应该为:
-
-"ggg#ll"
+// "ggg#ll"
 
 }

@@ -15,14 +15,12 @@ public:
         /*
             使用两个指针，快指针移动两个位置，慢指针移动一个位置
             若有环，在两指针到达结尾前，快慢指针一定会相遇
-            两指针初始位置相同
-            h->
-            h->a
-            h->a->b
+            两指针初始位置差1，
         */
+       if(head==NULL) return false;
 
-       ListNode* f=head, *s=head;
-       while(s!=NULL && f!=NULL && s->next!=NULL && f->next->next!=NULL){
+       ListNode* s=head, *f=head->next;
+       while(s!=NULL && f!=NULL && f->next!=NULL){
            if(f==s)return true;
            s=s->next;
            f=f->next->next;

@@ -19,3 +19,17 @@ int knapsack(int W, int N, vector<int>& weights, vector<int>& values) {
     }
     return dp[N][W];
 }
+
+int knapsack_v2(int W, int N, vector<int>& weights, vector<int>& values) {
+    vector<int> dp(W+1);
+
+    for (int i = 1; i <= N; i++) {
+        int w = weights[i - 1], v = values[i - 1];
+        for (int j = W; j >= 1; j--) {
+            if (j >= w) {
+                dp[j] = max(dp[j], dp[j - w] + v);
+            }
+        }
+    }
+    return dp[W];
+}

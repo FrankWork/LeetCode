@@ -1,4 +1,4 @@
-#include "template.h"
+#include "../template.h"
 
 class LCS {
 public:
@@ -23,4 +23,11 @@ int main(){
 
     LCS lcs;
     cout << lcs.findLCS("1A2C3D4B56",10,"B1D23CA45B6A",12)<<endl;//6
+
+    string a, b;
+    std::getline(cin, a);
+    std::getline(cin, b);
+    // cin>>a>>b;
+    // cout << a << b << endl;
+    cout << lcs.findLCS(a,a.length(),b,b.length())<<endl;//6
 }   

@@ -28,3 +28,19 @@ void print2d(vector<vector<T>> & matrix){
         print(matrix[i]);
     }
 }
+
+//Definition for singly-linked list.
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(NULL) {}
+};
+
+
+void printList(ListNode* head){
+    while(head){
+        cout << head->val<<"->";
+        head=head->next;
+    }
+    cout <<"NULL"<<endl;
+}

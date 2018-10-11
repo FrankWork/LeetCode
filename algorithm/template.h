@@ -10,6 +10,7 @@
 #include <map>
 #include <unordered_map>
 #include <queue>
+#include <stack>
 
 
 using namespace std;
@@ -44,3 +45,13 @@ void printList(ListNode* head){
     }
     cout <<"NULL"<<endl;
 }
+
+
+//Definition for a binary tree node.
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+ 

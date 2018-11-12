@@ -6,6 +6,7 @@
 #include <fstream>
 #include <cstdio>
 #include <cstring>
+#include <cstdlib>
 
 using namespace std;
 
@@ -125,7 +126,7 @@ void copyLines(string& finName, string& foutName){
 	ifstream fin(finName);
 	ofstream fout(foutName);
 
-	char newline[]="\n";
+	char eol[]="\n"; // End of Line
 	string line;
 	int nLines=0;
 
@@ -133,12 +134,78 @@ void copyLines(string& finName, string& foutName){
 		nLines++;
 		//fout << line << "\n";
 		fout.write(line.c_str(), sizeof(char)*line.size());
-		fout.write(newline, strlen(newline));
+		fout.write(eol, strlen(eol));
 	}
 	printf("nLines %d\n", nLines);
 }
 
-int main(){
+class CopyTask{
+public:
+	CopyTask(const string& finName, const string& foutName, int nThreads)
+		: nThreads_(nThreads){
+		fin.open(finName);
+		fout.open(foutName);
+		strcpy(eol, "\n");
+	}
+	void run(){
+		if(nThreads_ <= 1){// 单线程
+			while(getline(fin, line_)){
+				nLines++;
+				fout.write(line_.c_str(), sizeof(char)*line_.size());
+				fout.write(eol, strlen(eol));
+			}
+		}else{// 多线程
+			for(int i=0;i<nThreads_;++i){
+				thread tr(&CopyTask::copyThreadFunc, this);
+				tr.join();
+			}
+		}
+		printf("nLines %d\n", nLines);
+	}
+	void copyThreadFunc(){
+		// 能不能保证拷贝的顺序和原来的相同?
+		// 试验了一次顺序是相同的
+		string line;
+		bool ok;
+
+		while(true){
+			rd_mtx.lock();
+			ok = getline(fin, line);
+			rd_mtx.unlock();
+
+			if(!ok) break;
+
+			ct_mtx.lock();
+			nLines++;
+			ct_mtx.unlock();
+
+			wt_mtx.lock();
+			fout.write(line.c_str(), sizeof(char)*line.size());
+			fout.write(eol, strlen(eol));
+			wt_mtx.unlock();
+		}
+	}
+	~CopyTask(){
+		fin.close();
+		fout.close();
+	}
+private:
+	mutex rd_mtx;
+	mutex wt_mtx;
+	mutex ct_mtx;
+
+	ifstream fin;
+	ofstream fout;
+
+	char eol[2]; // End of Line
+	string line_;
+	int nLines=0;
+	int nThreads_;
+};
+
+
+
+int main(int argc, char* argv[]){
 	//string finName="wiki2.txt";
 	string finName="wiki103.txt";
 	string foutName="wiki.copy";
@@ -146,23 +213,13 @@ int main(){
 	//countLines(finName);
 	//countWords(finName);
 	//countLinesWords(finName);
-	copyLines(finName, foutName);
+	//copyLines(finName, foutName);
+	int nThreads = 0;
+	if(argc>1)
+		nThreads = strtol(argv[1], NULL, 10);
 
-		// values.push_back(42);
+	CopyTask task(finName, foutName, nThreads);
+	task.run();
 
-		// thread tr1(threadFnc, 1);
-		// thread tr2(threadFnc, 2);
-		// thread tr3(threadFnc, 3);
-		// thread tr4(threadFnc, 4);
-
-		// tr1.join();
-		// tr2.join();
-		// tr3.join();
-		// tr4.join();
-		// 
-		// for(int v: values){
-		//		 cout << v << " ";
-		// }
-		// cout << endl;
-		return 0;
+	return 0;
 }

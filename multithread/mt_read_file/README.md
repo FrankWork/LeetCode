@@ -88,4 +88,25 @@ real    0m1.290s
 user    0m0.466s
 sys     0m0.824s
 
+$ time ./main		# `write` and class
+nLines 1809468
+
+real    0m5.642s
+user    0m0.461s
+sys     0m0.908s
+
+$ time ./main		# `write`, class, 10 threads
+nLines 1809468
+
+real    0m5.907s
+user    0m0.639s
+sys     0m1.023s
+
+$ time ./main		# `write`, class, 4 threads
+nLines 1809468
+
+real    0m1.552s
+user    0m0.659s
+sys     0m0.894s
+
 ```
